@@ -1,6 +1,6 @@
 ## Introdução à Ciência da Computação com Python - Parte 1
 
-Este repositório foi criado para registrar o desenvolvimento dos programas propostos pelo curso de **Introdução à Ciência da Computação com Python** oferecido pela USP através da plataforma Coursera. 
+Este repositório foi criado principalmente para me familiarizar com os recursos e uso do Git e GitHub, e paralelamente a isso, registrar o desenvolvimento dos programas propostos pelo curso de **Introdução à Ciência da Computação com Python** oferecido pela USP através da plataforma Coursera.
 
  :ringed_planet: **Semana 1:** Visão geral do curso | O que é ciência da computação | Instalação do Python | Linha de comando | Operadores aritiméticos e relacionais | Variáveis 
 
