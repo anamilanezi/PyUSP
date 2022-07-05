@@ -45,7 +45,7 @@ while "_" in display and lives > 0:
     if "_" not in display:
         print("***You win.***")
     elif lives == 0:
-        print("You lose.")
+        print(f'You lose. The word is "{chosen_word}".')
     
     print(f"{' '.join(display)}")
     print(stages[lives])
