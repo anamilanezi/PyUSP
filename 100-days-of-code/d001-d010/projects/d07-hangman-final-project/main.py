@@ -4,12 +4,10 @@ import hangman_words
 import os
 
 stages = hangman_art.stages
-
 word_list = hangman_words.word_list
 chosen_word = random.choice(word_list)
 word_length = len(chosen_word)
-
-lives = 6 
+lives = 6
 
 # The next line clears the console
 os.system('cls' if os.name == 'nt' else 'clear')
@@ -43,9 +41,13 @@ while "_" in display and lives > 0:
         print("")
 
     if "_" not in display:
-        print("***You win.***")
+        print(hangman_art.lines)
+        print(hangman_art.win)
+
     elif lives == 0:
-        print(f'You lose. The word is "{chosen_word}".')
+        print(hangman_art.lose)            
+        print(f'The word is "{chosen_word}".')
+        
     
     print(f"{' '.join(display)}")
     print(stages[lives])
