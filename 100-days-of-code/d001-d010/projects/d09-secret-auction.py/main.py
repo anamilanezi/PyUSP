@@ -5,8 +5,7 @@ import os
 
 bids = []
 bid_again = True
-higher_bid = 0
-winner = ''
+
 
 # Creates a function to add new bids into the list
 def new_bid(person_name, bid_value):
@@ -14,6 +13,21 @@ def new_bid(person_name, bid_value):
         person_name: bid_value
     }
     bids.append(new_entry)
+
+def bidder_winner(bids_list):
+    higher_bid = 0
+    winner = ''
+    # Loop through the bids list
+    for bid_record in bids_list:
+        # Each item of the list is a dictionary so we loop through using the keys and obtain all the info needed
+        for bidder in bid_record:
+            bid_amount = bid_record[bidder]
+            if bid_amount > higher_bid:
+                higher_bid = bid_amount
+                winner = bidder
+    print(art.win)
+    print(f"The winner is {winner.title()} with a bid of ${higher_bid:.2f}.")
+
 
 print(art.logo)
 print("Welcome to the secret auction program!")
@@ -33,14 +47,5 @@ while bid_again:
     # The next line clears the console
     os.system('cls' if os.name == 'nt' else 'clear')
 
-# Loop through the list of bids
-for bid_record in bids:
-    # Each item of the list is a dictionary so we loop through using the keys and obtain all the info needed
-    for bidder in bid_record:
-        bid_amount = bid_record[bidder]
-        if bid_amount > higher_bid:
-            higher_bid = bid_amount
-            winner = bidder
+bidder_winner(bids)
 
-print(art.win)
-print(f"The winner is {winner.title()} with a bid of ${higher_bid:.2f}.")
