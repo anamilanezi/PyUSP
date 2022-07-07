@@ -1,3 +1,5 @@
+#  Write a function that checks whether if the number passed into it is a prime number or not.
+
 #Write your code below this line 👇
 def prime_checker(number):
     is_prime = True 
