@@ -10,22 +10,13 @@
 ## Cards are not removed from the deck as they are drawn.
 ## The computer is the dealer.
 
-# Do you want to play a game of BlackJack? Type 'y' or 'n': 
-# Your cards: [ , ], current score: 
-# Computer's first card:
-# Type 'y' to get another card, type 'n' to pass
-
+from art import logo
 from random import choice
+import os
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
 
 cards_dic = {'A': 11, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'J': 10, 'Q': 10, 'K': 10, }  
-
-
-
-# random_card = choice(list(cards_dic.keys()))
-# print(random_card)
-# print(cards_dic[random_card])
 
 def get_random_card():
     return choice(list(cards_dic.keys()))
@@ -57,18 +48,21 @@ def format_list(any_list):
     return list_to_str
 
 def get_result(player_score, computer_score):
+    lines = "-"
+    result = ""
     if player_score > 21:
-        print("You went over. You lose.")
+        result = "You went over. You lose."
     elif player_score <= 21 and computer_score > 21:
-        print("Opponent went over. You win! :)")
+        result = "Opponent went over. You win! :)"
     elif player_score > computer_score:
-        print("You win")
+        result = "You win!!! :)"
     else: 
-        print("You lose")
+        result = "You lose!!! :("
+    print(f"{lines:-^50}\n{result:^50}\n{lines:-^50}")
 
 def game_text(player_hand, player_score, computer_first_card):
-    print(f"Your cards: [ {format_list(player_hand)} ], current score: {player_score}")
-    print(f"Computer's first card: {computer_first_card}")
+    print(f"\nYour cards: [ {format_list(player_hand)} ], current score: {player_score}")
+    print(f"Computer's first card: {computer_first_card}\n")
 
 
 def final_text(player_hand, player_score, computer_hand, computer_score):
@@ -76,32 +70,51 @@ def final_text(player_hand, player_score, computer_hand, computer_score):
     print(f"Computer's final hand is [ {format_list(computer_hand)} ], final score: {computer_score} ")
     get_result(player_score, computer_score)
 
+def wants_to(user_input):
+    if (user_input.lower() == 'y'):
+        return True
+    elif (user_input.lower() == 'n'):
+        return False
 
-player_hand = start_hand()
-player_score = get_score(player_hand)
-computer_hand = start_hand()
-computer_score = get_score(computer_hand)
-computer_first_card = computer_hand[0]
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-game_text(player_hand, player_score, computer_first_card)
+def start_game():
+    play = input("Do you want to play a game of BlackJack? Type 'y' or 'n': ")
 
-if player_score == 21:
-    print("BLACKJACK! You win.")
-
-while player_score < 21:
-    get_another_card = input("Type 'y' to get another card, type 'n' to pass: ")
-
-    if get_another_card == 'y':
-        player_hand = add_new_card(player_hand)
+    if wants_to(play):
+        os.system('cls' if os.name == 'nt' else 'clear')
+        print(logo)
+        player_hand = start_hand()
         player_score = get_score(player_hand)
-    game_text(player_hand, player_score, computer_first_card)
+        computer_hand = start_hand()
+        computer_score = get_score(computer_hand)
+        computer_first_card = computer_hand[0]
 
-    if get_another_card == 'n':
-        break
+        game_text(player_hand, player_score, computer_first_card)
 
-while computer_score < 17:
-    computer_hand = add_new_card(computer_hand)
-    computer_score = get_score(computer_hand)
+        if player_score == 21:
+            print("BLACKJACK! You win.")
 
+        while player_score < 21:
+            get_another_card = input("Type 'y' to get another card, type 'n' to pass: ")
 
-final_text(player_hand, player_score, computer_hand, computer_score)
+            if wants_to(get_another_card):
+                player_hand = add_new_card(player_hand)
+                player_score = get_score(player_hand)
+            game_text(player_hand, player_score, computer_first_card)
+
+            if not wants_to(get_another_card):
+                break
+
+        while computer_score < 17: 
+            computer_hand = add_new_card(computer_hand) 
+            computer_score = get_score(computer_hand)   
+
+        final_text(player_hand, player_score, computer_hand, computer_score)
+        start_game()
+
+    else: 
+        quit()
+clear()
+start_game()
