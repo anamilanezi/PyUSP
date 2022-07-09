@@ -10,7 +10,7 @@
 ## Cards are not removed from the deck as they are drawn.
 ## The computer is the dealer.
 
-from art import logo
+from art import *
 from random import choice
 import os
 
@@ -47,27 +47,57 @@ def format_list(any_list):
     list_to_str = ' ][ '.join(any_list)
     return list_to_str
 
+def print_lines():
+    print(f"{'-':-^62}")
+
+def decor_text(any_string, with_line=False):
+    if with_line:
+        print_lines()
+        print(f"{any_string:^62}")
+        print_lines()
+    else:
+        print(f"{any_string:^62}")
+
 def get_result(player_score, computer_score):
-    lines = "-"
+
     result = ""
     if player_score > 21:
-        result = "You went over. You lose."
+        decor_text("You went over.")
+        result = lose
     elif player_score <= 21 and computer_score > 21:
-        result = "Opponent went over. You win! :)"
+        decor_text("Opponent went over.")
+        result = win
     elif player_score > computer_score:
-        result = "You win!!! :)"
-    else: 
-        result = "You lose!!! :("
-    print(f"{lines:-^50}\n{result:^50}\n{lines:-^50}")
+        result = win
+    else:
+        result = lose 
+    decor_text(result, True)
+    
+    # print(f"{lines:-^50}\n{result:^50}\n{lines:-^50}")
 
 def game_text(player_hand, player_score, computer_first_card):
-    print(f"\nYour cards: [ {format_list(player_hand)} ], current score: {player_score}")
-    print(f"Computer's first card: {computer_first_card}\n")
+    # print(f"\nYour cards: [ {format_list(player_hand)} ], current score: {player_score}")
+    # print(f"Computer's first card: {computer_first_card}\n")
+    show_player_cards = f"Your cards: [ {format_list(player_hand)} ]"
+    show_player_score = f"Current score: {player_score}"
+    show_pc_card = f"Computer's first card: {computer_first_card}"
+    decor_text(show_player_cards, True)
+    decor_text(show_player_score)
+    decor_text(show_pc_card, True)
 
 
 def final_text(player_hand, player_score, computer_hand, computer_score):
-    print(f"Your final hand is [ {format_list(player_hand)} ], final score: {player_score}")
-    print(f"Computer's final hand is [ {format_list(computer_hand)} ], final score: {computer_score} ")
+    # print(f"Your final hand is [ {format_list(player_hand)} ] {'final score:':>15} {player_score}")
+    # print(f"Computer's final hand is [ {format_list(computer_hand)} ] {'final score:':>15} {computer_score} ")
+    show_player_final_hand = f"Your final hand is [ {format_list(player_hand)} ]"
+    show_player_final_score = f"Your final score is {player_score}"
+    show_pc_final_hand = f"Computer's final hand is [ {format_list(computer_hand)} ]"
+    show_pc_final_score = f"Computer final score is {computer_score}"
+    decor_text(show_player_final_hand)
+    decor_text(show_player_final_score)
+    decor_text(show_pc_final_hand)
+    decor_text(show_pc_final_score)
+    
     get_result(player_score, computer_score)
 
 def wants_to(user_input):
@@ -100,9 +130,10 @@ def start_game():
             get_another_card = input("Type 'y' to get another card, type 'n' to pass: ")
 
             if wants_to(get_another_card):
+                print_lines()
                 player_hand = add_new_card(player_hand)
                 player_score = get_score(player_hand)
-            game_text(player_hand, player_score, computer_first_card)
+                game_text(player_hand, player_score, computer_first_card)
 
             if not wants_to(get_another_card):
                 break
@@ -116,5 +147,7 @@ def start_game():
 
     else: 
         quit()
+
 clear()
+decor_text(welcome, True)
 start_game()
