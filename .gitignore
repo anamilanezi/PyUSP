@@ -2,4 +2,7 @@
 
 **/appbrewery/
 
-**.vscode
+**/.vscode/
+
+**/flask/
+
