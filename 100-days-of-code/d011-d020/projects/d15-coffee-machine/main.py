@@ -4,9 +4,9 @@ take_order = True
 
 # TODO 1. Asks which drink the user wants
 
-order = input("What would you like? (espresso/latte/cappuccino): ")
-drink = MENU[order]
-drink_cost = drink['cost']
+# order = input("What would you like? (espresso/latte/cappuccino): ")
+# drink = MENU[order]
+# drink_cost = drink['cost']
 
 # TODO: 2. Print a report of all coffee machine resources when user types 'report'
 
@@ -27,14 +27,13 @@ def process_report(resources_data):
 def process_drink(drink_order, resources_data):
 
     ingredients = drink_order['ingredients']
-    print(ingredients, resources_data)
 
     for ingredient in ingredients:
         if ingredient in resources_data:
             if (resources_data[ingredient] - ingredients[ingredient]) >= 0:
                 resources_data[ingredient] -= ingredients[ingredient]
             else:
-                print(f"Sorry there is not enough {ingredient}")
+                print(f"Sorry there is not enough {ingredient}.")
                 return False
     return True
 
@@ -58,33 +57,39 @@ def check_payment(total_inserted, cost):
 
     change = total_inserted - cost
     if change >= 0:
-        print(f"Here is ${change} in change.")
+        print(f"Here is ${round(change,2)} in change.")
         return True
     else:
         print("Sorry that's not enough money. Money refunded.")
         return False
 
 
-def update_money(cost, resources_data):
-
-    resources_data['money'] += cost
-
-
 def take_order():
+
+    order = input("What would you like? (espresso/latte/cappuccino): ")
+
     if order == 'report':
         process_report(resources)
+        take_order()
+    elif order == 'quit':
+        quit()
     else:
+        drink = MENU[order]
+        drink_cost = drink['cost']
         available_resources = process_drink(drink, resources)
+
         if available_resources:
-            print(f"Updated resources: {resources}") #
 
             print("Please insert coins.")
             total = insert_coins(coins)
-            print(f"total money inserted: {total}") #
+
             if check_payment(total, drink_cost):
-                update_money(drink_cost, resources)
-            print(f"Updated resources: {resources}") #
+                resources['money'] += drink_cost
+
             print("Here is your espresso ☕. Enjoy! ")
+            take_order()
+        else:
+            take_order()
 
 
 take_order()
