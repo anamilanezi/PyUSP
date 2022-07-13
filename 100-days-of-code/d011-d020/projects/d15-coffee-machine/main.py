@@ -86,7 +86,7 @@ def take_order():
             if check_payment(total, drink_cost):
                 resources['money'] += drink_cost
 
-            print("Here is your espresso ☕. Enjoy! ")
+            print(f"Here is your {order} ☕. Enjoy! ")
             take_order()
         else:
             take_order()
