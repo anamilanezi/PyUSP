@@ -1,60 +1,49 @@
 from menu import *
-
-take_order = True
-
-# TODO 1. Asks which drink the user wants
-
-# order = input("What would you like? (espresso/latte/cappuccino): ")
-# drink = MENU[order]
-# drink_cost = drink['cost']
-
-# TODO: 2. Print a report of all coffee machine resources when user types 'report'
+import os
 
 
-def process_report(resources_data):
+def clear():
+    """'Clear the screen"""
+    os.system('cls' if os.name == 'nt' else 'clear')
 
-    for resource in resources_data:
+
+def process_report():
+    """Prints the current availability of ingredients and money on machine."""
+    for resource in resources:
         if resource == 'money':
-            print(f"{resource.title()}: ${resources_data[resource]}")
+            print(f"{resource.title()}: ${resources[resource]}")
         elif resource == 'coffee':
-            print(f"{resource.title()}: {resources_data[resource]}g")
+            print(f"{resource.title()}: {resources[resource]}g")
         else:
-            print(f"{resource.title()}: {resources_data[resource]}ml")
-
-# TODO: 3. Checks if there is enough resources to make the drink
+            print(f"{resource.title()}: {resources[resource]}ml")
 
 
-def process_drink(drink_order, resources_data):
-
-    ingredients = drink_order['ingredients']
+def check_resources(drink_type):
+    """Returns true if there is enough ingredients for ordered drink, false if not."""
+    ingredients = drink_type['ingredients']
 
     for ingredient in ingredients:
-        if ingredient in resources_data:
-            if (resources_data[ingredient] - ingredients[ingredient]) >= 0:
-                resources_data[ingredient] -= ingredients[ingredient]
+        if ingredient in resources:
+            if resources[ingredient] >= ingredients[ingredient]:
+                return True
             else:
                 print(f"Sorry there is not enough {ingredient}.")
                 return False
-    return True
-
-# TODO: 4. Asks for the coins to be inserted
 
 
-def insert_coins(coins_data):
+def process_coins():
+    """Asks for coin of each value and returns the total dollars inserted."""
     total_dollars = []
-    for coin in coins_data:
-        insert = int(input(f"How many {coin}?: "))
-        total_inserted = insert * coins_data[coin]
+    for coin in coins:
+        inserted_coins = int(input(f"How many {coin}?: "))
+        total_inserted = inserted_coins * coins[coin]
         total_dollars.append(total_inserted)
 
     return sum(total_dollars)
 
 
-# TODO: 5. Checks if there is enough money to pay for the drink
-# TODO: 6. Calculate the change
-
 def check_payment(total_inserted, cost):
-
+    """Returns true if the payment is sufficent to pay for the ordered drink, false if not."""
     change = total_inserted - cost
     if change >= 0:
         print(f"Here is ${round(change,2)} in change.")
@@ -64,38 +53,40 @@ def check_payment(total_inserted, cost):
         return False
 
 
-def take_order():
+def make_coffee(drink_type):
+    """Updates resources availability according to ordered drink"""
+    ingredients = drink_type['ingredients']
 
+    for ingredient in ingredients:
+        if ingredient in resources:
+            resources[ingredient] -= ingredients[ingredient]
+
+
+def take_order():
+    """Takes a coffee order."""
     order = input("What would you like? (espresso/latte/cappuccino): ")
 
     if order == 'report':
-        process_report(resources)
-        take_order()
+        process_report()
+
     elif order == 'quit':
         quit()
     else:
         drink = MENU[order]
         drink_cost = drink['cost']
-        available_resources = process_drink(drink, resources)
+        available_resources = check_resources(drink)
 
         if available_resources:
 
             print("Please insert coins.")
-            total = insert_coins(coins)
+            total = process_coins()
 
             if check_payment(total, drink_cost):
+                make_coffee(drink)
                 resources['money'] += drink_cost
+                print(f"Here is your {order} ☕. Enjoy! ")
 
-            print(f"Here is your {order} ☕. Enjoy! ")
-            take_order()
-        else:
-            take_order()
+    take_order()
 
 
 take_order()
-
-
-
-
-
-
