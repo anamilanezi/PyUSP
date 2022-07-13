@@ -10,11 +10,11 @@ def clear():
 
 def print_lines():
     '''Prints a line of hifen for decoration'''
-    print(f"{'-':-^80}")
+    print(f"{'-':-^60}")
 
 def play_again():
     '''Asks the user if wants to play again after finishing a game'''
-    user_input = input("Do you want to play again? Type 'y' or 'n': "). lower()
+    user_input = input("   Do you want to play again? Type 'y' or 'n': "). lower()
     if (user_input.lower() == 'y'):
         return True
     elif (user_input.lower() == 'n'):
@@ -33,29 +33,29 @@ def item_text(item):
     '''Generates the text for each item.'''
     description = item['description']
     if description[0].lower == 'a':
-        article = 'an'
+        article = 'An'
     else:
-        article = 'a'
-    text = f"{item['name']}, {article} {item['description']}, from {item['country']}."
+        article = 'A'
+    text = f"{item['name']}.\n   {article} {item['description']}, from {item['country']}."
     return text
 
 def print_text(list):
     '''Generate the game text with current itens for comparison'''
     print_lines()
-    print(f"Compare A: {item_text(list[0])}")
+    print(f"   Compare A: {item_text(list[0])}")
     print(art.vs)
-    print(f"Against B: {item_text(list[1])}")
+    print(f"   Against B: {item_text(list[1])}")
     print_lines()
 
 def user_answer():
     '''Asks for user which option has more followers and returns an index'''
-    answer = input("Who has more followers? Type 'A' or 'B': ").lower()
+    answer = input("   Who has more followers? Type 'A' or 'B': ").lower()
     if answer == 'a':
         return 0
     elif answer == 'b':
         return 1
     else: 
-        print("That's not a valid answer. Try again.")
+        print("   That's not a valid answer. Try again.")
         return user_answer()
 
 def check_answer(max_followers, list):
@@ -65,14 +65,6 @@ def check_answer(max_followers, list):
         return True
     else:
         return False
-
-# def update_list(game_list, data):
-#     '''Removes option A (which turns option B into option A), gets a new item from data, checks if it is on current list, if not on list and adds new random item into option B'''
-#     del game_list[0]
-#     new_item = choice(data)
-#     if new_item not in game_list:
-#         game_list.append(new_item)
-#         return game_list
 
 def update_list(game_list, data):
     '''Removes option A (which turns option B into option A), gets a new item from data, checks if it is on current list, if not on list and adds new random item into option B'''
@@ -100,7 +92,7 @@ def start_game():
             clear()
             print(art.logo)
             
-            print(f"You're right! Current score: {score}.")
+            print(f"   You're right! CURRENT SCORE: [{score}].")
         a = ab_list[0]
         b = ab_list[1]
 
@@ -109,13 +101,13 @@ def start_game():
         print_text(ab_list)
     
     print_lines()
-    print(f"Sorry, that's wrong. Final score: {score}.")
+    print(f"   Sorry, that's wrong. Final score: {score}.")
 
     if play_again():
         clear()
         start_game()
     else:
-        print("Thank you for playing the Higher Lower game! :)")
+        print("   Thank you for playing the Higher Lower game! :)")
         quit()
 
 start_game()
