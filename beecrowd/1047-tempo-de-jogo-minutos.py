@@ -20,7 +20,7 @@ if tempo <= 0:
 horas = tempo // 60
 minutos = tempo % 60
 
-print(f"O JOGO DUROU {horas} HORA(S) E {minutos} MINUTOS(S)")
+print(f"O JOGO DUROU {horas} HORA(S) E {minutos} MINUTO(S)")
 
 # Método 2 - Respostas corretas mas não aceito
 
