@@ -15,6 +15,6 @@ bill_with_tip = total_bill + (total_bill * tip)
 splitted_bill = bill_with_tip / people_to_split
 
 # Round to two decimal digits
-rounded_bill = "{:.2f}".format(splitted_bill)
+#rounded_bill = "{:.2f}".format(splitted_bill)
 
-print(f"Each person shloud pay: ${rounded_bill}")
+print(f"Each person should pay: ${splitted_bill:.2f}")
