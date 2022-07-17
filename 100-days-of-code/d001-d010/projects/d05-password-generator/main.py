@@ -1,6 +1,8 @@
 import random
 import os
 
+generating = True
+
 logo = """ 
          ___  _   _           _____     ______     
         /   || | | |         |  _  |    |  _  \    
@@ -17,23 +19,27 @@ logo = """
 | \_/ |  __/ |\  |.___/ / |\ \___  |./ / (_) | |   
 \_____/\___\_| \_/\____/\_| \_|  |_/\_/ \___/|_|   
 """
+
+
 def clear():
-    ''''Clear the screen'''
+    """'Clear the screen"""
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def restart():
-    '''Asks the user if wants to play again after finishing a game'''
-    user_input = input("Do you want to generate another password? Type 'y' or 'n': "). lower()
+
+def restart(user_input):
+    """Returns True if user answered 'y' and False if 'n' """
     if (user_input.lower() == 'y'):
         return True
     elif (user_input.lower() == 'n'):
         return False
 
+
 def print_lines():
-    '''Prints a line of hifen for decoration'''
+    """Prints a line of hifen for decoration"""
     print(f"{'-':-^55}")
 
-def start():
+
+while generating:
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
@@ -69,12 +75,10 @@ def start():
     print_lines()
     print(f"Here is your password: {password}")
     print_lines()
+    user_choice = input("Do you want to generate another password? Type 'y' or 'n': ").lower()
+    generating = restart(user_choice)
 
-    if restart():
-        clear()
-        start()
-    else:
-        print("Thank you for using the Password Generator! :)")
-        quit()
+    if not generating:
+        print("Thank you for using the Password Generator!")
 
-start()
+    clear()
