@@ -1,5 +1,5 @@
 from random import choice, sample
-from game_data import *
+from game_data import data
 import art
 import os
 

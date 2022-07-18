@@ -1,4 +1,4 @@
-from menu import *
+from menu import MENU, resources, coins
 import os
 
 
