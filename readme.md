@@ -8,6 +8,6 @@ Repositório criado para armazenar os códigos utilizados durante meus estudos c
 
  * [Introdução à Ciência da Computação  com Python - Parte 1](/pyUSP): Curso oferecido pela USP na plataforma Coursera. Meu primeiro contato com a programação e a linguagem.
 
- * [Python Crash Course](/py_crash_course) (EN): Exemplos e exercícios utilizados no livro "Python Crash Course - A hands-on project-based introduction to programming" de Eric Matthes.
+ * [Python Crash Course](/py-crash-course) (EN): Exemplos e exercícios utilizados no livro "Python Crash Course - A hands-on project-based introduction to programming" de Eric Matthes.
 
 
