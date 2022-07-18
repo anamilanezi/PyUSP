@@ -63,12 +63,18 @@ def spirograph(turtle, circle_radius, circle_distance):
 
 
 tim = t.Turtle()
+
+# To use RGB we need to set the colormode to 255
 t.colormode(255)
 
 tim.shape("turtle")
-# tim.pensize(15)
+tim.pensize(15)
 tim.speed(0)
 tim.color(random_color_list(selected_colors))
+
+for _ in range(200):
+    random_dot(tim, 30)
+    tim.color(random_color_list(selected_colors))
 
 # spirograph(tim, 100, 5)
 
@@ -83,9 +89,7 @@ tim.color(random_color_list(selected_colors))
 #     random_walk(tim, 30)
 #     tim.color(random_color_list(selected_colors))
 
-for _ in range(200):
-    random_dot(tim, 30)
-    tim.color(random_color_list(selected_colors))
+
 
 screen = t.Screen()
 screen.exitonclick()
