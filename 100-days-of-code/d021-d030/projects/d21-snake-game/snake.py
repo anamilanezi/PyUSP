@@ -13,17 +13,24 @@ class Snake:
         self.body = []
         self.create_body(segments)
         self.head = self.body[0]
+        self.tail = self.body[:-1]
 
     def create_body(self, segments=3):
-        xpos = 0  # random.randint(-200, 200)
-        ypos = 0  # random.randint(-200, 200)
+        xpos = 0
+        ypos = 0
         for i in range(segments):
-            body_segment = Turtle(shape="square")
-            body_segment.color("#FFE459")
-            body_segment.penup()
-            body_segment.goto(x=xpos, y=ypos)
-            self.body.append(body_segment)
-            xpos -= 20.0
+            self.add_segment(xpos, ypos)
+
+    def add_segment(self, xpos, ypos):
+        body_segment = Turtle(shape="square")
+        body_segment.color("#E04DB0")
+        body_segment.penup()
+        body_segment.goto(x=xpos, y=ypos)
+        self.body.append(body_segment)
+        xpos -= 20.0
+
+    def extend(self):
+        pass
 
     def move(self):
         for seg_num in range(len(self.body) - 1, 0, -1):

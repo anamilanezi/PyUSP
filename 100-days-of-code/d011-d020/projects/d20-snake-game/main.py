@@ -4,7 +4,7 @@ from snake import Snake
 
 screen = Screen()
 screen.setup(width=600, height=600)
-screen.bgcolor("black")
+screen.bgcolor("#11052C")
 screen.title("Snake Game")
 screen.tracer(0)  # Turn turtle animation on/off and set delay for update drawings
 
