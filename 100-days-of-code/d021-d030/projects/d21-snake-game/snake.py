@@ -9,16 +9,17 @@ RIGHT = 0
 
 class Snake:
 
-    def __init__(self, segments=3):
+    def __init__(self):
         self.body = []
-        self.create_body(segments)
+        self.segments = 3
+        self.create_body(self.segments)
         self.head = self.body[0]
         self.tail = self.body[:-1]
 
-    def create_body(self, segments=3):
+    def create_body(self, segments):
         xpos = 0
         ypos = 0
-        for i in range(segments):
+        for _ in range(segments):
             self.add_segment(xpos, ypos)
 
     def add_segment(self, xpos, ypos):
@@ -30,7 +31,10 @@ class Snake:
         xpos -= 20.0
 
     def extend(self):
-        pass
+        last_xy_position = self.body[-1].position()
+        xpos = last_xy_position[0]
+        ypos = last_xy_position[1]
+        self.add_segment(xpos, ypos)
 
     def move(self):
         for seg_num in range(len(self.body) - 1, 0, -1):
