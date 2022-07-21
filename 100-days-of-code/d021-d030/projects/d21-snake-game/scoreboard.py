@@ -13,6 +13,7 @@ class Scoreboard(Turtle):
         self.goto(0, 265)
         self.score = 0
         self.write_score()
+        self.all_scores = {}
 
     def write_score(self):
         self.clear()
@@ -26,3 +27,7 @@ class Scoreboard(Turtle):
         self.goto(0, 0)
         self.color("#E6B566")
         self.write("GAME OVER :(", align=ALIGNMENT, font=FONT)
+
+    def record_score(self, name):
+        self.all_scores[name] = self.score
+        print(self.all_scores)
