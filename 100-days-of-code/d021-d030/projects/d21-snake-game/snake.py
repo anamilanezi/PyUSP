@@ -15,6 +15,7 @@ class Snake:
         self.create_body(self.segments)
         self.head = self.body[0]
         self.tail = self.body[:-1]
+        self.last_direction = self.head.heading()
 
     def create_body(self, segments):
         xpos = 0
@@ -42,19 +43,20 @@ class Snake:
             new_y = self.body[seg_num - 1].ycor()
             self.body[seg_num].goto(new_x, new_y)
         self.head.forward(MOVE_DISTANCE)
+        self.last_direction = self.head.heading()
 
     def up(self):
-        if self.head.heading() != DOWN:
+        if self.last_direction != DOWN:
             self.head.setheading(UP)
 
     def down(self):
-        if self.head.heading() != UP:
+        if self.last_direction != UP:
             self.head.setheading(DOWN)
 
     def left(self):
-        if self.head.heading() != RIGHT:
+        if self.last_direction != RIGHT:
             self.head.setheading(LEFT)
 
     def right(self):
-        if self.head.heading() != LEFT:
+        if self.last_direction != LEFT:
             self.head.setheading(RIGHT)
