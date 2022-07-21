@@ -1,6 +1,6 @@
 from calculator import Calculator
 from prettytable import PrettyTable
-import calculator
+
 
 import sys
 
