@@ -83,7 +83,3 @@ for value in ordinal:
         print(f"{value}th")
 
 # 5.13
-
-# Ideias de programas:
-# - Tabela co campeonato brasileiro (série A e B)
-

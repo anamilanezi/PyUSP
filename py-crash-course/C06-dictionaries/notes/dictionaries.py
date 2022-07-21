@@ -55,7 +55,7 @@ print(f"New position: {alien_0['x_position']}")
 
 # Remover pares key-value:
 
-del alien_0['points']            # Especificar a chave vai deletar o par
+# del alien_0['points']            # Especificar a chave vai deletar o par
 
 # Dicionário de objetos similares
 
@@ -72,7 +72,7 @@ print(f"Sarah's favorite language is {language}.")
 # Usar .get() para acessar valores através de chaves que podem não estar no dic.
 
 alien_0 = {'color': 'green', 'speed': 'slow'}
-print(alien_0['points'])         # Resulta em um KeyError feia
+# print(alien_0['points'])         # Resulta em um KeyError feia
 
 point_value  = alien_0.get('points', 'No point value assigned')
 print(point_value)   
@@ -155,7 +155,7 @@ for language in set(favorite_languages.values()):
 # Lista de dicionários
 
 alien_0 = {'color': 'green', 'points': 5}
-alien_1 = {'color': 'yellow', 'points:' 10}
+alien_1 = {'color': 'yellow', 'points:': 10}
 alien_2 = {'color': 'red', 'points': 15}
 
 aliens = [alien_0, alien_1, alien_2]
@@ -204,8 +204,7 @@ pizza = {
     }
 
 # Resumo do pedido
-print(f"You ordered a {pizza['crust']}-crust pizza "
-    "with the following toppings":)
+print(f"You ordered a {pizza['crust']}-crust pizza with the following toppings:")
 
 for topping in pizza['toppings']:
     print("\t" + topping)
