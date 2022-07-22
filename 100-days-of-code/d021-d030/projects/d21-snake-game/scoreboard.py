@@ -29,5 +29,12 @@ class Scoreboard(Turtle):
         self.write("GAME OVER :(", align=ALIGNMENT, font=FONT)
 
     def record_score(self, name):
+        if name is None:
+            name = "???"
         self.all_scores[name] = self.score
         print(self.all_scores)
+
+    def write_all_scores(self):
+        pass
+        # criar uma lista com nomes e pontuação e imprimir tabela na tela quando usuario digitar nao
+

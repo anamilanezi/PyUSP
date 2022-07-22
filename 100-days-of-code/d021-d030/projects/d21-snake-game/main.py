@@ -55,6 +55,8 @@ def play_game():
 
         if not game_is_on:
             play_again = screen.textinput(title="GAME OVER", prompt="Do you want to play again? (y/n)")
+            if play_again is None:
+                return False
             if play_again.lower() == 'y':
                 screen.clear()
                 return True
