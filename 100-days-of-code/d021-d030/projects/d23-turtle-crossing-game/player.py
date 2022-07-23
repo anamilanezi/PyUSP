@@ -14,9 +14,14 @@ class Player(Turtle):
         self.penup()
         self.starting_position()
         self.shapesize(stretch_wid=1.5, stretch_len=1.5)
+        self.color("#547327")
 
     def move_up(self):
         self.forward(MOVE_DISTANCE)
 
     def starting_position(self):
         self.goto(STARTING_POSITION)
+
+
+
+

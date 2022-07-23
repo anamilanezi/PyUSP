@@ -1,7 +1,7 @@
 from turtle import Turtle
 import random
 
-COLORS = ["red", "orange", "yellow", "green", "blue", "purple"]
+COLORS = ["#D92546", "#184A8C", "#FFCF03", "#F2B807", "#6149A6"]
 STARTING_MOVE_DISTANCE = 5
 MOVE_INCREMENT = 10
 
@@ -30,9 +30,6 @@ class CarManager:
 
     def increase_speed(self):
         self.move_distance += MOVE_INCREMENT
-
-    def stop(self):
-        self.move_distance = 0
 
     def restart(self):
         self.all_cars = []
