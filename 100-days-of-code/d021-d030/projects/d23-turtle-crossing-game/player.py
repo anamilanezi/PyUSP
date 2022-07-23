@@ -13,6 +13,7 @@ class Player(Turtle):
         self.shape("turtle")
         self.penup()
         self.starting_position()
+        self.shapesize(stretch_wid=1.5, stretch_len=1.5)
 
     def move_up(self):
         self.forward(MOVE_DISTANCE)
