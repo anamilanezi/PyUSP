@@ -16,6 +16,7 @@ class Snake:
         self.head = self.body[0]
         self.tail = self.body[:-1]
         self.last_direction = self.head.heading()
+        self.speed = 0.1
 
     def create_body(self, segments):
         xpos = 0
@@ -60,3 +61,11 @@ class Snake:
     def right(self):
         if self.last_direction != LEFT:
             self.head.setheading(RIGHT)
+
+    def reset(self):
+        for segment in self.body:
+            segment.goto(1000, 1000)
+        self.body.clear()
+        self.create_body(3)
+        self.head = self.body[0]
+
