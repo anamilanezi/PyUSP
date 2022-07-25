@@ -1,80 +1,125 @@
 import turtle
 import pandas
+import time
 
-# Set the screen with img
-screen = turtle.Screen()
-screen.title("Estados do Brasil")
-screen.setup(width=643, height=597)
+# Cria a tela, define imagem como fundo
+tela = turtle.Screen()
+tela.title("Estados do Brasil")
+tela.setup(width=643, height=605)
 img = "Brazil_Political_Map.gif"
-screen.addshape(img)
+tela.addshape(img)
 turtle.shape(img)
 
-# Create a writer turtle
-writer = turtle.Turtle()
-writer.hideturtle()
+# Cria um objeto Turtle para escrever na tela
+escrita = turtle.Turtle()
+escrita.hideturtle()
 
 
-# Get xy coordinate of state
-def get_xy(state):
-    state_row = data[data.estado == state]
-    x = int(state_row.x)
-    y = int(state_row.y)
-    coordinates = (x, y)
-    return coordinates
+# Obtém as cordenadas x e y de um estado ou capital
+def obter_xy(tipo, resposta_usuario):
+    dados_linha = data[data[tipo] == resposta_usuario]
+    x = int(dados_linha.x)
+    y = int(dados_linha.y)
+    coordenadas = (x, y)
+    return coordenadas
 
 
-# Write the state name on map
-def write_state_name():
-    writer.penup()
-    writer.goto(get_xy(answer_state))
-    writer.write(answer_state, align='center', font=('Consolas', 8, 'bold'))
+# Escrever o nome do Estado ou Capital no mapa
+def escrever_nome(tipo):
+    escrita.penup()
+    escrita.goto(obter_xy(tipo, resposta))
+    escrita.write(resposta, align='center', font=('Consolas', 8, 'bold'))
 
 
-# Counter start
-correct_answers = ""
-count_correct = 0
+# Inciando a contagem
+exibe_acertos = ""
+conta_acertos = 0
 
 
-# Get a list of states from csv file
+# Obter a lista de Estados e Capitais do arquivo CSV
 data = pandas.read_csv("estados_capitais_br.csv")
-states_list = data.estado.to_list()
+lista_estados = data.estado.to_list()
+lista_capitais = data.capital.to_list()
+
+# Listas para testar o programa:
+# lista_estados = ["Amazonas", "Bahia"]
+# lista_capitais = ["Porto Alegre", "Rio de Janeiro", "São Luís"]
 
 
-#Ask for states until complete the list:
-while count_correct < 27:
+jogar_capitais = True
 
-    # Ask the user for an answer
-    answer_state = screen.textinput(title=f"Guess the State {correct_answers}", prompt="What's another state's name?").title()
+# Pede para usuário adivinhar um Estado enquanto a lista não estiver vazia
+while lista_estados:
 
-    if answer_state == "Sair":
+    # Entrada da resposta
+    resposta = tela.textinput(title=f"Adivinhe os Estados {exibe_acertos}", prompt="Diga o nome de um Estado:           ").title()
+
+    # Sair do modo de adivinhação de Estados
+    if resposta == "Sair":
+        continuar = tela.textinput(title="Adivinhe as Capitais",
+                         prompt="Gostaria de tentar adivinhar as capitais? (S/N)").title()
+        if continuar == "S":
+            jogar_capitais = True
+        else:
+            jogar_capitais = False
         break
 
-    # Checks if answer is in states list
-    if answer_state in states_list:
+    # Verifica se a resposta do usuário está na lista de estados:
+    if resposta in lista_estados:
 
-        # Removes from list
-        states_list.remove(answer_state)
+        # Remove respostas corretas da lista original
+        lista_estados.remove(resposta)
 
-        # Write state name on xy
-        write_state_name()
+        # Escreve respostas corretas no mapa
+        escrever_nome('estado')
 
-        # Update correct answers count:
-        count_correct += 1
-        correct_answers = f"{count_correct}/27"
+        # Pausa momentaneamente para usuário poder ver o mapa
+        time.sleep(1.5)
 
+        # Atualiza a contagem de acertos:
+        conta_acertos += 1
+        exibe_acertos = f"{conta_acertos}/27"
 
-# Create a CSV file of missing states:
-states_list_dict = {
-    'estados': states_list
-}
+# Pausa tela após acertar todos os nomes
+time.sleep(1.5)
 
-# Create a dataframe with missed states names and export to a csv file
-# data = pandas.DataFrame(states_list_dict)
-# data.to_csv("estados_para_aprender.csv")
+# Limpa a tela
+escrita.clear()
 
-screen.exitonclick()
-# def get_mouse_click_coor(x, y):
-#     print(x, y)
+# Reinicia contagem
+exibe_acertos = ""
+conta_acertos = 0
+
 #
-# turtle.onscreenclick(get_mouse_click_coor)
-# screen.mainloop()
+if jogar_capitais:
+    while lista_capitais:
+
+        # Ask the user for an answer
+        resposta = tela.textinput(title=f"Adivinhe as Capitais {exibe_acertos}", prompt="Diga o nome de uma capital:          ").title()
+
+        if resposta == "Sair":
+            break
+
+        if resposta in lista_capitais:
+            lista_capitais.remove(resposta)
+            escrever_nome('capital')
+            time.sleep(1.5)
+            conta_acertos += 1
+            exibe_acertos = f"{conta_acertos}/27"
+
+# Cria um arquivo CSV com lista de estados e capitais que usuário não acertou
+if lista_estados:
+    estados_dict = {
+        'estados': lista_estados
+    }
+    data = pandas.DataFrame(estados_dict)
+    data.to_csv("estados_para_aprender.csv")
+
+if lista_capitais:
+    capitais_dict = {
+        'capitais': lista_capitais
+    }
+    data = pandas.DataFrame(capitais_dict)
+    data.to_csv("capitais_para_aprender.csv")
+
+tela.exitonclick()
