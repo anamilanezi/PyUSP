@@ -46,7 +46,7 @@ student_dict = {
 
 import pandas
 
-# Cria um dataframe
+# Create dataframe
 student_df = pandas.DataFrame(student_dict)
 
 # Loop throug rows of  data frame
