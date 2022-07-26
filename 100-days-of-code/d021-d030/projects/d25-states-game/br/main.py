@@ -90,7 +90,6 @@ escrita.clear()
 exibe_acertos = ""
 conta_acertos = 0
 
-#
 if jogar_capitais:
     while lista_capitais:
 
