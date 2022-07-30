@@ -13,7 +13,8 @@ label.pack()
 #Buttons
 def action():
     print("Do something")
-
+    TEXT = entry.get()
+    print(TEXT)
 #calls action() when pressed
 button = Button(text="Click Me", command=action)
 button.pack()
