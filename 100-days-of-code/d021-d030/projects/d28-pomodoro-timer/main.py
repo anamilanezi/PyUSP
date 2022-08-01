@@ -6,9 +6,9 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Fixedsys"
-WORK_MIN = 1 # 25
-SHORT_BREAK_MIN = 1 # 5
-LONG_BREAK_MIN = 1 # 20
+WORK_MIN = 25 # 25
+SHORT_BREAK_MIN = 5 # 5
+LONG_BREAK_MIN = 20 # 20
 reps = 0
 checks = []
 pomos = []
@@ -33,7 +33,7 @@ def start_timer():
     global reps
     reps += 1
 
-    work_sec = WORK_MIN * 60
+    work_sec = WORK_MIN * 60 # 60
     short_break_sec = SHORT_BREAK_MIN * 60
     long_break_sec = LONG_BREAK_MIN * 60
 
