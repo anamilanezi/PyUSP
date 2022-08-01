@@ -3,29 +3,34 @@ import pandas as pd
 import random
 BACKGROUND_COLOR = "#B1DDC6"
 
-flip_timer = None
 
 # --------------------------------------- DATA --------------------------------------- #
-df = pd.read_csv("data/french_words.csv")
-# Orient creates a list of dictionaries
-words_to_learn = df.to_dict(orient="records")
+try:
+    df = pd.read_csv("data/words_to_learn.csv")
+except FileNotFoundError:
+    df = pd.read_csv("data/french_words.csv")
+finally:
+    words_to_learn = df.to_dict(orient="records") # Orient creates a list of dictionaries
+random_word = {}
 
-
-# dictionary = {row.French: row.English for (index, row) in df_dictionary.iterrows()}
-
-# fr_word, en_word = random.choice(list(dictionary.items()))
-# print(fr_word)
+print(len(words_to_learn))
 
 
 # ------------------------------------ FUNCTIONS ------------------------------------- #
 
+def known_word():
+
+    words_to_learn.remove(random_word)
+    data = pd.DataFrame(words_to_learn)
+    data.to_csv("data/words_to_learn.csv", index=False)
+    change_word()
+
+
 def change_word():
 
-    global flip_timer
-    try:
-        window.after_cancel(flip_timer)
-    except ValueError:
-        pass
+    global random_word, flip_timer
+
+    window.after_cancel(flip_timer)
 
     random_word = random.choice(words_to_learn)
     fr_word = random_word['French']
@@ -34,15 +39,13 @@ def change_word():
     canvas.itemconfig(card_title, text="French", fill="black")
     canvas.itemconfig(card_word, text=fr_word, fill="black")
 
-    en_word = random_word['English']
-    flip_timer = window.after(4000, flip_card, en_word)
+    flip_timer = window.after(3500, flip_card)
 
 
-def flip_card(word):
+def flip_card():
     canvas.itemconfig(card_title, text="English", fill="white")
-    canvas.itemconfig(card_word, text=word, fill="white")
+    canvas.itemconfig(card_word, text=random_word['English'], fill="white")
     canvas.itemconfig(canvas_image, image=card_back_img)
-
 
 
 # ---------------------------------------- UI ---------------------------------------- #
@@ -69,10 +72,11 @@ wrong_button = tk.Button(image=wrong_img, highlightthickness=0, borderwidth=0, c
 wrong_button.grid(column=0, row=1)
 
 right_img = tk.PhotoImage(file="images/right.png")
-right_button = tk.Button(image=right_img, highlightthickness=0, borderwidth=0, command=change_word)
+right_button = tk.Button(image=right_img, highlightthickness=0, borderwidth=0, command=known_word)
 right_button.grid(column=1, row=1)
 
 # Calling the function to pick a random word to start
+flip_timer = window.after(3500, flip_card)
 change_word()
 
 window.mainloop()
