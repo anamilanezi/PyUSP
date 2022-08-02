@@ -28,11 +28,11 @@ def find_password():
         if user_entry in data:
             username = data[user_entry]["username"]
             password = data[user_entry]["password"]
-            messagebox.showinfo(title=user_entry.title(), message=f"Email:   {username}\nSenha: {password}"
+            messagebox.showinfo(title=user_entry.title(), message=f"Usuário: {username}\nSenha:   {password}"
                                                                   f"\n\nSenha copiada para área de transferência.")
             pyperclip.copy(data[user_entry]['password'])
         else:
-            messagebox.showinfo(title="Not found", message=f"No details for {user_entry.title()} exists.")
+            messagebox.showinfo(title="Não encontrado", message=f"Nenhuma informação encontrada para {user_entry.title()}.")
 
 
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
