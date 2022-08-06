@@ -1,21 +1,26 @@
 import requests
 from twilio.rest import Client
+from dotenv import load_dotenv
 import os
 
-MY_LAT = -10
-MY_LONG = -66
+load_dotenv("D:/Usuarios/Usuario/ENV/.env")
 
-weather_api_key = os.environ.get("WEATHER_API_KEY")
+MY_LAT = float(os.getenv("my_lat"))
+MY_LONG = float(os.getenv("my_long"))
+
+# Twilio API config
+account_sid = os.getenv('TWILIO_ACCOUNT_SID')
+auth_token = os.getenv('TWILIO_AUTH_TOKEN')
+
+# Weather API
+weather_api_key = os.getenv("WEATHER_API_KEY")
 weather_endpoint = "https://api.openweathermap.org/data/2.5/onecall"
-
-account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
-auth_token = os.environ.get('TWILIO_AUTH_TOKEN')
 
 parameters = {
     "lat": MY_LAT,
     "lon": MY_LONG,
     "exclude": "current,minutely,daily",
-    "appid": os.environ.get("WEATHER_API_KEY"),
+    "appid": weather_api_key,
     "units": "metric"
 }
 
@@ -43,8 +48,8 @@ if will_rain:
     message = client.messages \
                 .create(
                 body="It's going to rain today. Bring an ☔.",
-                from_='+1',
-                to='+5'
+                from_=os.getenv("TWILIO_NUMBER"),
+                to=os.getenv("my_number")
             )
 
     print(message.status)
