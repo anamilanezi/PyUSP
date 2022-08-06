@@ -56,7 +56,9 @@ yesterday_closing = float(daily[yesterday]["4. close"])
 day_before_closing = float(daily[day_before]["4. close"])
 
 price_difference = yesterday_closing - day_before_closing
+# yesterday_5_pct = (yesterday_closing * 5) / 100
 diff_pct = (price_difference * 100) / yesterday_closing
+
 
 if abs(diff_pct) >= 5:
     print("Get News!")
@@ -71,6 +73,8 @@ if abs(diff_pct) >= 5:
     else:
         symbol = "🔺"
 
+    client = Client(account_sid, auth_token)
+
     for article in articles:
         headline = article["title"]
         brief = article["content"]
@@ -79,7 +83,6 @@ if abs(diff_pct) >= 5:
                       f"Headline: {headline}\n" \
                       f"Brief: {brief}"
 
-        client = Client(account_sid, auth_token)
         message = client.messages \
             .create(
             body=message_txt,
