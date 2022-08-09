@@ -12,7 +12,7 @@ time = now.strftime("%H:%M:%S")
 APP_ID = os.getenv("NUTRITIONIX_IDD")
 API_KEY = os.getenv("NUTRITIONIX_API_KEY")
 nutri_URL = "https://trackapi.nutritionix.com/v2/natural/exercise"
-sheet_URL = os.getenv("SHEETY_ENDPOINT")
+sheet_URL = os.getenv("SHEETY_ENDPOINT_WORKOUT")
 
 exercise_text = input("Tell me which exercises you did: ")
 
@@ -30,7 +30,7 @@ response = requests.post(url=nutri_URL, json=parameters, headers=nutri_headers)
 result = response.json()
 exercises = result["exercises"][0]
 
-sheet_headers = headers = {"Authorization": f"Bearer {os.getenv('SHEETY_TOKEN')}"}
+sheet_headers = {"Authorization": f"Bearer {os.getenv('SHEETY_TOKEN')}"}
 
 sheet_row = {
     "workout": {
