@@ -55,13 +55,16 @@ class DataManager:
         requests.put(url=endpoint, json=edit_row, headers=self.headers)
 
     def new_user(self, first, last, email):
-        user = {
+
+        row = {
+            "user": {
             "firstName": first,
             "lastName": last,
             "email": email
+            }
         }
 
-        requests.post(url=self.URL_USER, json=user, headers=self.headers)
+        response = requests.post(url=self.URL_USER, json=row, headers=self.headers)
         print(response.text)
 
 

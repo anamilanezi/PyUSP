@@ -46,7 +46,7 @@ class FlightSearch:
             "nights_in_dst_to": 28,
             "max_stopovers": 2,
             "flight_type": "round",
-            "curr": "BRL",
+            "curr": "GBP",
         }
 
         response = requests.get(url=URL, params=params, headers=self.header)

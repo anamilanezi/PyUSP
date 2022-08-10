@@ -19,4 +19,4 @@ class NotificationManager:
             connection.sendmail(
                 from_addr=FROM_EMAIL,
                 to_addrs=TO_EMAIL,
-                msg="message")
+                msg=f"{message}")
