@@ -55,7 +55,6 @@ hr {
 a {
   color: #11999E;
   font-family: 'Montserrat', sans-serif;
-  margin: 10px 20px;
   text-decoration: none;
 }
 
@@ -85,7 +84,6 @@ a:hover {
     text-align: right;
 }
 
-
 .pro {
   text-decoration: underline;
 }
@@ -102,8 +100,7 @@ a:hover {
 
 .copyright {
   color: #EAF6F6;
-  font-size: 0.75rem;
-  padding: 20px 0;
+  font-size: 1rem;
 }
 
 .saturno {
@@ -140,6 +137,10 @@ a:hover {
     width: 20%;
 }
 
+.footer-link {
+    padding: 20px;
+}
+
 .btn {
   background: #11cdd4;
   background-image: -webkit-linear-gradient(top, #11cdd4, #11999e);
@@ -165,4 +166,56 @@ a:hover {
   background-image: -o-linear-gradient(top, #30e3cb, #2bc4ad);
   background-image: linear-gradient(to bottom, #30e3cb, #2bc4ad);
   text-decoration: none;
+}
+
+.rodape {
+    background-color: #8A6DD4;
+    margin-top: 30px;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.rodape__texto {
+    color: white;
+    margin: 15px 0;
+    width: 70%;
+    line-height: 1.5rem;
+}
+
+.rodape__link {
+    color: #FFD37B;
+    text-shadow: 1px 1px 2px var(--branco);
+    font-weight: bold;
+}
+
+.rodape__link:hover {
+    color: #24208C;
+    text-shadow: 1px 1px 2px var(--verde-botao);
+}
+
+.rodape__autora {
+    font-size: 1.1rem;
+    color: #24208C;
+    text-shadow: 3px 3px 10px var(--verde-botao);
+    margin-bottom: 10px;
+}
+
+.rodape__lista {
+    padding: 0;
+}
+
+.rodape__item {
+    display: inline-block;
+}
+
+.rodape__img {
+    width: 50px;
+}
+
+.rodape__img:hover {
+    -webkit-filter: drop-shadow(5px 5px 5px #FFD37B);
+    filter: drop-shadow(5px 5px 5px #24208C);
 }
