@@ -7,16 +7,18 @@ for linhas in range(12):
         linha.append(float(input()))
     matriz.append(linha)
 
-superior = []
+inferior = []
+col = 2
 
-for i in range(0, 5):
-    superior.append(matriz[i][i+1:11-i])
+for i in range(7, 12):
+    inferior.append(matriz[i][i-col:i])
+    col += 2
 
-superior_list = sum(superior, [])
+inferior_list = sum(inferior, [])
 
-soma = sum(superior_list)
+soma = sum(inferior_list)
 if operacao == "S":
     print(f"{soma:.1f}")
 else:
-    media = soma / len(superior_list)
+    media = soma / len(inferior_list)
     print(f"{media:.1f}")
