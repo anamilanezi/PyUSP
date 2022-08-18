@@ -55,8 +55,9 @@ while True:
             if int(score.text.replace(",", "")) >= prices[i]:
                 link = driver.find_element(By.ID, f"buy{names[i]}")
                 link.click()
-                timeout += 5
                 break
+        timeout += 5
+
     if time.time() > five_min:
         cookie_per_s = driver.find_element(By.ID, "cps").text
         print(cookie_per_s)
